@@ -112,16 +112,15 @@ def get_training_model():
     x, conv_layer, conv_vars = convolutional_layers()
     
     # Densely connected layer
-    W_fc1 = weight_variable([32 * 8 * 128, 2048])
+    W_fc1 = weight_variable([32 * 8 * 256, 2048])
     b_fc1 = bias_variable([2048])
 
-    conv_layer_flat = tf.reshape(conv_layer, [-1, 32 * 8 * 128])
+    conv_layer_flat = tf.reshape(conv_layer, [-1, 32 * 8 * 256])
     h_fc1 = tf.nn.relu(tf.matmul(conv_layer_flat, W_fc1) + b_fc1)
 
     # Output layer
-    W_fc2 = weight_variable([2048, 1 + 7 * len(common.CHARS)])
-    b_fc2 = bias_variable([1 + 7 * len(common.CHARS)])
-
+    W_fc2 = weight_variable([2048, 1 + common.CHARSLENGTH * len(common.CHARS)])
+    b_fc2 = bias_variable([1 + common.CHARSLENGTH * len(common.CHARS)])
     y = tf.matmul(h_fc1, W_fc2) + b_fc2
 
     return (x, y, conv_vars + [W_fc1, b_fc1, W_fc2, b_fc2])
@@ -145,9 +144,9 @@ def get_detect_model():
     h_conv1 = tf.nn.relu(conv2d(conv_layer, W_conv1,
                                 stride=(1, 1), padding="VALID") + b_fc1) 
     # Fifth layer
-    W_fc2 = weight_variable([2048, 1 + 7 * len(common.CHARS)])
-    W_conv2 = tf.reshape(W_fc2, [1, 1, 2048, 1 + 7 * len(common.CHARS)])
-    b_fc2 = bias_variable([1 + 7 * len(common.CHARS)])
+    W_fc2 = weight_variable([2048, 1 + common.CHARSLENGTH * len(common.CHARS)])
+    W_conv2 = tf.reshape(W_fc2, [1, 1, 2048, 1 + common.CHARSLENGTH * len(common.CHARS)])
+    b_fc2 = bias_variable([1 + common.CHARSLENGTH * len(common.CHARS)])
     h_conv2 = conv2d(h_conv1, W_conv2) + b_fc2
 
     return (x, h_conv2, conv_vars + [W_fc1, b_fc1, W_fc2, b_fc2])

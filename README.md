@@ -4,13 +4,7 @@ Using neural networks to build an automatic number plate recognition system.
 See [this blog post](http://matthewearl.github.io/2016/05/06/cnn-anpr/) for an
 explanation.
 
-**Note: This is an experimental project and is incomplete in a number of ways,
-if you're looking for a practical number plate recognition system this project
-is not for you.** If however you've read the above blog post and wish to tinker
-with the code, read on.  If you're really keen you can tackle some of the
-enhancements on the Issues page to help make this project more practical.
-Please comment on the relevant issue if you plan on making an enhancement and
-we can talk through the potential solution.
+** This model produces currenlty no results **
 
 Usage is as follows:
 

@@ -51,7 +51,7 @@ import common
 FONT_DIR = "./fonts"
 FONT_HEIGHT = 32  # Pixel size to which the chars are resized
 
-OUTPUT_SHAPE = (64, 128)
+OUTPUT_SHAPE = (64, 256)
 
 CHARS = common.CHARS + " "
 
@@ -158,14 +158,24 @@ def make_affine_transform(from_shape, to_shape,
 
 
 def generate_code():
-    return "{}{}{}{} {}{}{}".format(
-        random.choice(common.LETTERS),
-        random.choice(common.LETTERS),
-        random.choice(common.DIGITS),
-        random.choice(common.DIGITS),
-        random.choice(common.LETTERS),
-        random.choice(common.LETTERS),
-        random.choice(common.LETTERS))
+    return "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format(
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS),
+        random.choice(common.CHARS))
 
 
 def rounded_rect(shape, radius):
@@ -218,7 +228,7 @@ def generate_bg(num_bg_images):
     found = False
     while not found:
         fname = "bgs/{:08d}.jpg".format(random.randint(0, num_bg_images - 1))
-        bg = cv2.imread(fname, cv2.CV_LOAD_IMAGE_GRAYSCALE) / 255.
+        bg = cv2.imread(fname, cv2.IMREAD_GRAYSCALE) / 255.
         if (bg.shape[1] >= OUTPUT_SHAPE[1] and
             bg.shape[0] >= OUTPUT_SHAPE[0]):
             found = True
